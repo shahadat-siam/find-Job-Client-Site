@@ -18,10 +18,7 @@ const AllJobs = () => {
     const { data } = await axios(`${import.meta.env.VITE_API_URL}/all-jobs`);
     setJobs(data);
   };
-
-  const handleUpdate = (jobId) => {
-    console.log('Update job with ID:', jobId); 
-  };
+ 
   
   const handleDelete =  async(jobId) => {
     // console.log('Delete job with ID:', jobId);
@@ -51,7 +48,7 @@ const AllJobs = () => {
           </div>
       <div className="grid  grid-cols-1 gap-8 mt-8 xl:mt-16 md:grid-cols-2 lg:grid-cols-3 ">
         {jobs.map((job) => (
-          <JobCard key={job._id} job={job} onUpdate={() => handleUpdate(job._id)} onDelete={() => handleDelete(job._id)} />
+          <JobCard key={job._id} job={job} getData={getData}  onDelete={() => handleDelete(job._id)} />
         ))}
       </div>
     </div>
