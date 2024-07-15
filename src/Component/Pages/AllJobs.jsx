@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import JobCard from "./JobCard";
+import toast from "react-hot-toast";
 
 const AllJobs = () => {
   const [jobs, setJobs] = useState([]);
@@ -13,14 +14,25 @@ const AllJobs = () => {
     getData();
   }, []);
 
+  const getData = async () => {
+    const { data } = await axios(`${import.meta.env.VITE_API_URL}/all-jobs`);
+    setJobs(data);
+  };
+
   const handleUpdate = (jobId) => {
-    console.log('Update job with ID:', jobId);
-    // Implement your update logic here
+    console.log('Update job with ID:', jobId); 
   };
   
-  const handleDelete = (jobId) => {
-    console.log('Delete job with ID:', jobId);
-    // Implement your delete logic here
+  const handleDelete =  async(jobId) => {
+    // console.log('Delete job with ID:', jobId);
+    try{
+        const {data} = await axios.delete(`${import.meta.env.VITE_API_URL}/jobs/${jobId}` ) 
+         toast.success('successfully delete this job')
+         getData()
+         console.log(data)
+      }catch(error){
+        console.log(error) 
+      }
   };
 
   return (
