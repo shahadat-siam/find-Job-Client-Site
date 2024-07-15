@@ -1,10 +1,10 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+ 
+import AllJobs from './Pages/AllJobs';
 
 const Home = () => {
     return (
         <div> 
-            
+            <AllJobs/>
         </div>
     );
 };
